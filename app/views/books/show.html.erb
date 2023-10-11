@@ -1,8 +1,18 @@
+<%= render 'users/userinfo', user: @user, book: @book %>
+
 <h1>Book detail</h1>
 <table>
   <tr>
     <td>
-      <%= @book.title %>
+        <%= image_tag @user.get_profile_image(100,100) %><br>
+        <%= link_to user_path do %>
+          <%= @user.name %>
+        <% end %>
+    </td>
+    <td>
+      <%= link_to book_path do %>
+        <%= @book.title %>
+      <% end %>
     </td>
     <td>
       <%= @book.body %>
