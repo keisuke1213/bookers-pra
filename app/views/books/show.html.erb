@@ -1,11 +1,20 @@
-<%= render 'users/userinfo', user: @user, book: @book %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> error prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render 'users/userinfo', user: @user, book: @book_new %>
 
 <h1>Book detail</h1>
 <table>
   <tr>
     <td>
         <%= image_tag @user.get_profile_image(100,100) %><br>
-        <%= link_to user_path do %>
+        <%= link_to user_path(@user.id) do %>
           <%= @user.name %>
         <% end %>
     </td>
@@ -22,7 +31,7 @@
       <%= link_to "Edit" ,edit_book_path(@book) %>
     </td>
     <td>
-      <%= link_to "Destroy" ,books_path, method: :delete %>
+      <%= link_to "Destroy" ,book_path(@book),  method: :delete %>
     </td>
     <% end %>
   </tr>
